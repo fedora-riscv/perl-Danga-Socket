@@ -1,6 +1,6 @@
 Name:           perl-Danga-Socket
 Version:        1.57
-Release:        2%{?dist}
+Release:        2%{?dist}.1
 Summary:        Event loop and event-driven async socket base class
 License:        GPL or Artistic
 Group:          Development/Libraries
@@ -9,7 +9,7 @@ Source0:        http://www.cpan.org/modules/by-module/Danga/Danga-Socket-%{versi
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
-BuildRequires:  perl(ExtUtils::MakeMaker) perl(Test::More) perl(Sys::Syscall)
+BuildRequires:  perl(ExtUtils::MakeMaker) perl(Test::More) perl(Sys::Syscall) perl(Time::HiRes)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -47,6 +47,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Thu Aug 09 2007 Ruben Kerkhof <ruben@rubenkerkhof.com> 1.57-3
+- Add Time::HiRes to the BuildRequires to fix building on EL-4
 * Wed May 07 2007 Ruben Kerkhof <ruben@rubenkerkhof.com> 1.57-2
 - Include examples in %%doc
 * Mon May 07 2007 Ruben Kerkhof <ruben@rubenkerkhof.com> 1.57-1
