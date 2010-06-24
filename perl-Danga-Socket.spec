@@ -1,12 +1,11 @@
 Name:           perl-Danga-Socket
-Version:        1.58
-Release:        5%{?dist}
+Version:        1.61
+Release:        1%{?dist}
 Summary:        Event loop and event-driven async socket base class
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Danga-Socket/
 Source0:        http://www.cpan.org/modules/by-module/Danga/Danga-Socket-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  perl(ExtUtils::MakeMaker) perl(Test::More) perl(Sys::Syscall)
@@ -25,8 +24,6 @@ be fast. Danga::Socket is both a base class for objects, and an event loop.
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-
 make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
 
 find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} \;
@@ -37,16 +34,16 @@ find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
 %check
 make test
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
 %defattr(-,root,root,-)
 %doc CHANGES examples/
-%{perl_vendorlib}/*
-%{_mandir}/man3/*
+%{perl_vendorlib}/Danga
+%{_mandir}/man3/Danga::Socket.*
 
 %changelog
+* Thu Jun 24 2010 Ruben Kerkhof <ruben@rubenkerkhof.com> 1.61-1
+- Upstream released new version
+
 * Fri Apr 30 2010 Marcela Maslanova <mmaslano@redhat.com> - 1.58-5
 - Mass rebuild with perl-5.12.0
 
