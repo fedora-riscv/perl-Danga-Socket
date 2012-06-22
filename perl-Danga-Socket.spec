@@ -42,7 +42,7 @@ make test
 
 %changelog
 
-* Thu Fri 22 2012 Luis Bazan <lbazan@fedoraproject.org> 1.61-1
+* Thu Fri 22 2012 Luis Bazan <lbazan@fedoraproject.org> - 1.61-1
 - Upstream released new version
 
 * Fri Apr 30 2010 Marcela Maslanova <mmaslano@redhat.com> - 1.58-5
