@@ -37,10 +37,13 @@ make test
 %files
 %defattr(-,root,root,-)
 %doc CHANGES examples/
-%{perl_vendorlib}/Danga
-%{_mandir}/man3/Danga::Socket.*
+%{perl_vendorlib}/*
+%{_mandir}/man3/*
 
 %changelog
+* Wed Aug 01 2012 Luis Bazan <lbazan@fedoraproject.org> - 1.61-4
+- changes lib root
+
 * Wed Aug 01 2012 Luis Bazan <lbazan@fedoraproject.org> - 1.61-3
 - rebuild againts to check log
 
