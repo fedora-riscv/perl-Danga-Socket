@@ -1,6 +1,6 @@
 Name:           perl-Danga-Socket
 Version:        1.61
-Release:        3%{?dist}
+Release:        5%{?dist}
 Summary:        Event loop and event-driven async socket base class
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -9,6 +9,7 @@ Source0:        http://www.cpan.org/modules/by-module/Danga/Danga-Socket-%{versi
 BuildArch:      noarch
 
 BuildRequires:  perl(ExtUtils::MakeMaker) perl(Test::More) perl(Sys::Syscall)
+BuildRequires:  perl(Time::HiRes)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -37,10 +38,14 @@ make test
 %files
 %defattr(-,root,root,-)
 %doc CHANGES examples/
-%{perl_vendorlib}/*
-%{_mandir}/man3/*
+%{perl_vendorlib}/Danga
+%{_mandir}/man3/Danga::Socket.*
 
 %changelog
+* Tue Aug 21 2012 Ken Dreyer <ktdreyer@ktdreyer.com> - 1.61-5
+- Explicitly BuildRequire Time::HiRes, so the test suite passes
+- Use the "Danga" name in the files listing, to match Rawhide
+
 * Wed Aug 01 2012 Luis Bazan <lbazan@fedoraproject.org> - 1.61-4
 - changes lib root
 
