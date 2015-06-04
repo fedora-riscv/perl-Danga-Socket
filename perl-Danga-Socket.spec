@@ -1,6 +1,6 @@
 Name:           perl-Danga-Socket
 Version:        1.61
-Release:        12%{?dist}
+Release:        13%{?dist}
 Summary:        Event loop and event-driven async socket base class
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -41,6 +41,9 @@ make test
 %{_mandir}/man3/Danga::Socket.*
 
 %changelog
+* Thu Jun 04 2015 Jitka Plesnikova <jplesnik@redhat.com> - 1.61-13
+- Perl 5.22 rebuild
+
 * Wed Aug 27 2014 Jitka Plesnikova <jplesnik@redhat.com> - 1.61-12
 - Perl 5.20 rebuild
 
