@@ -1,15 +1,35 @@
 Name:           perl-Danga-Socket
 Version:        1.61
-Release:        14%{?dist}
+Release:        15%{?dist}
 Summary:        Event loop and event-driven async socket base class
 License:        GPL+ or Artistic
-Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Danga-Socket/
 Source0:        http://www.cpan.org/modules/by-module/Danga/Danga-Socket-%{version}.tar.gz
 BuildArch:      noarch
-
-BuildRequires:  perl(ExtUtils::MakeMaker) perl(Test::More) perl(Sys::Syscall)
-Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+# Build
+BuildRequires:  make
+BuildRequires:  perl
+BuildRequires:  perl(ExtUtils::MakeMaker) >= 6.76
+# Runtime
+BuildRequires:  perl(bytes)
+BuildRequires:  perl(Carp)
+BuildRequires:  perl(constant)
+BuildRequires:  perl(Errno)
+BuildRequires:  perl(fields)
+# XXX: BuildRequires:  perl(IO::KQueue)
+# XXX: BuildRequires:  perl(IO::Poll)
+BuildRequires:  perl(POSIX)
+BuildRequires:  perl(Socket)
+BuildRequires:  perl(strict)
+BuildRequires:  perl(Sys::Syscall)
+BuildRequires:  perl(Time::HiRes)
+BuildRequires:  perl(vars)
+BuildRequires:  perl(warnings)
+# Tests only
+BuildRequires:  perl(base)
+BuildRequires:  perl(IO::Socket::INET)
+BuildRequires:  perl(Test::More)
+Requires:       perl(:MODULE_COMPAT_%(eval "$(perl -V:version)"; echo $version))
 
 %description
 This is an abstract base class for objects backed by a socket which
@@ -20,27 +40,26 @@ be fast. Danga::Socket is both a base class for objects, and an event loop.
 %setup -q -n Danga-Socket-%{version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+perl Makefile.PL INSTALLDIRS=vendor NO_PACKLIST=1
 make %{?_smp_mflags}
 
 %install
-make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
-
-find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} \;
-find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
-
-%{_fixperms} $RPM_BUILD_ROOT/*
+make pure_install DESTDIR=%{buildroot}
+%{_fixperms} %{buildroot}/*
 
 %check
 make test
 
 %files
-%defattr(-,root,root,-)
-%doc CHANGES examples/
-%{perl_vendorlib}/Danga
-%{_mandir}/man3/Danga::Socket.*
+%doc CHANGES examples
+%{perl_vendorlib}/*
+%{_mandir}/man3/*
 
 %changelog
+* Mon Aug 10 2015 Petr Šabata <contyk@redhat.com> - 1.61-15
+- Prevent the FTBFS by fixing the build time dependency list
+- Modernize the spec file
+
 * Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.61-14
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
