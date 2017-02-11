@@ -1,6 +1,6 @@
 Name:           perl-Danga-Socket
 Version:        1.61
-Release:        17%{?dist}
+Release:        18%{?dist}
 Summary:        Event loop and event-driven async socket base class
 License:        GPL+ or Artistic
 URL:            http://search.cpan.org/dist/Danga-Socket/
@@ -57,6 +57,9 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 1.61-18
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Sun May 15 2016 Jitka Plesnikova <jplesnik@redhat.com> - 1.61-17
 - Perl 5.24 rebuild
 
