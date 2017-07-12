@@ -8,7 +8,7 @@ Source0:        http://www.cpan.org/modules/by-module/Danga/Danga-Socket-%{versi
 BuildArch:      noarch
 # Build
 BuildRequires:  make
-BuildRequires:  perl
+BuildRequires:  perl-interpreter
 BuildRequires:  perl-generators
 BuildRequires:  perl(ExtUtils::MakeMaker) >= 6.76
 # Runtime
