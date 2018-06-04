@@ -3,8 +3,8 @@ Version:        1.61
 Release:        21%{?dist}
 Summary:        Event loop and event-driven async socket base class
 License:        GPL+ or Artistic
-URL:            http://search.cpan.org/dist/Danga-Socket/
-Source0:        http://www.cpan.org/modules/by-module/Danga/Danga-Socket-%{version}.tar.gz
+URL:            https://metacpan.org/release/Danga-Socket
+Source0:        https://cpan.metacpan.org/modules/by-module/Danga/Danga-Socket-%{version}.tar.gz
 BuildArch:      noarch
 # Build
 BuildRequires:  make
