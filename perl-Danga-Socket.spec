@@ -1,6 +1,6 @@
 Name:           perl-Danga-Socket
-Version:        1.61
-Release:        26%{?dist}
+Version:        1.62
+Release:        1%{?dist}
 Summary:        Event loop and event-driven async socket base class
 License:        GPL+ or Artistic
 URL:            https://metacpan.org/release/Danga-Socket
@@ -8,15 +8,18 @@ Source0:        https://cpan.metacpan.org/modules/by-module/Danga/Danga-Socket-%
 BuildArch:      noarch
 # Build
 BuildRequires:  make
-BuildRequires:  perl-interpreter
 BuildRequires:  perl-generators
+BuildRequires:  perl-interpreter
 BuildRequires:  perl(ExtUtils::MakeMaker) >= 6.76
 # Runtime
+# XXX: BuildRequires:  perl(BSD::Resource)
 BuildRequires:  perl(bytes)
 BuildRequires:  perl(Carp)
 BuildRequires:  perl(constant)
 BuildRequires:  perl(Errno)
+BuildRequires:  perl(Fcntl)
 BuildRequires:  perl(fields)
+BuildRequires:  perl(IO::Handle)
 # XXX: BuildRequires:  perl(IO::KQueue)
 # XXX: BuildRequires:  perl(IO::Poll)
 BuildRequires:  perl(POSIX)
@@ -29,6 +32,7 @@ BuildRequires:  perl(warnings)
 # Tests only
 BuildRequires:  perl(base)
 BuildRequires:  perl(IO::Socket::INET)
+BuildRequires:  perl(Net::EmptyPort)
 BuildRequires:  perl(Test::More)
 Requires:       perl(:MODULE_COMPAT_%(eval "$(perl -V:version)"; echo $version))
 
@@ -41,11 +45,11 @@ be fast. Danga::Socket is both a base class for objects, and an event loop.
 %setup -q -n Danga-Socket-%{version}
 
 %build
-perl Makefile.PL INSTALLDIRS=vendor NO_PACKLIST=1
-make %{?_smp_mflags}
+perl Makefile.PL INSTALLDIRS=vendor NO_PACKLIST=1 NO_PERLLOCAL=1
+%{make_build}
 
 %install
-make pure_install DESTDIR=%{buildroot}
+%{make_install}
 %{_fixperms} %{buildroot}/*
 
 %check
@@ -57,6 +61,9 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Tue Nov 05 2019 Jitka Plesnikova <jplesnik@redhat.com> - 1.62-1
+- 1.62 bump
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 1.61-26
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
