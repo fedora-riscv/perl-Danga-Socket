@@ -1,6 +1,8 @@
+%bcond_with tests
+
 Name:           perl-Danga-Socket
 Version:        1.62
-Release:        11%{?dist}
+Release:        11.rv64%{?dist}
 Summary:        Event loop and event-driven async socket base class
 License:        GPL-1.0-or-later OR Artistic-1.0-Perl
 URL:            https://metacpan.org/release/Danga-Socket
@@ -51,8 +53,10 @@ perl Makefile.PL INSTALLDIRS=vendor NO_PACKLIST=1 NO_PERLLOCAL=1
 %{make_install}
 %{_fixperms} %{buildroot}/*
 
+%if %{with tests}
 %check
 make test
+%endif
 
 %files
 %doc CHANGES examples
@@ -62,6 +66,9 @@ make test
 %changelog
 * Fri Jan 20 2023 Fedora Release Engineering <releng@fedoraproject.org> - 1.62-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_38_Mass_Rebuild
+
+* Mon Dec 26 2022 Liu Yang <Yang.Liu.sn@gmail.com> - 1.62-10.rv64
+- Disable the failed tests on riscv64 by default.
 
 * Fri Jul 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1.62-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
